@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "nomad-mobile": "apps/nomad-mobile",
+    "nomad-mobile-e2e": "apps/nomad-mobile-e2e"
+  }
+}
