@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "nomad-monorepo": "apps/nomad-monorepo",
+    "nomad-monorepo-e2e": "apps/nomad-monorepo-e2e"
+  }
+}
