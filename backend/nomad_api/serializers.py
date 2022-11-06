@@ -1,14 +1,11 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from nomad.models import Vendor
 
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class VendorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
+        model = Vendor
+        fields = '__all__'
+        
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
+

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'nomad_api',
     'rest_framework',
+    'nomad',
 ]
 
 MIDDLEWARE = [
