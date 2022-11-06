@@ -10,6 +10,7 @@ React Native and Django collabo to make us the next big thing!
   * `python3 -m venv env`
   * `source env/bin/activate`
 * Make sure you have `sqlite3` installed. It is usually already there in Macs.
+* Install dependencies ` pip freeze > requirements.txt`
 * Create the databases by running:
 	* `python manage.py makemigrations`
 	* `python manage.py migrate`
