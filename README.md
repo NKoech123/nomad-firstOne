@@ -1,12 +1,9 @@
-# NOMAD😍
+# NOMAD 😍 
+React Native and Django collabo to make us the next big thing!
 
-## Frontend
-at root `nomad`
-start with `yarn install`
-then Run `yarn start`
-
-## Frontend
-* At root, run `yarn install` then `yarn start`
+## Frontend(React Native App)
+* At root nomad, run`yarn install`
+* Run `yarn start`
 
 ## Backend
 * Activate the virtual env
