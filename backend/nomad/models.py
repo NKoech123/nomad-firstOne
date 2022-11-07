@@ -8,11 +8,6 @@ class User(models.Model):
         ('Vendor', 'Vendor'),
         ('Customer', 'Customer'),
     )
-
-    BUSINESS_TYPE = (
-        (1, 'Food and Beverages'),
-        (2, 'Clothes'),
-    )
     name = models.CharField(max_length=200)
     owner_name = models.CharField(max_length=200,default = 'emptyForNow')
     user_type = models.CharField(max_length=10, choices=USER_TYPE, default = 'Vendor')
