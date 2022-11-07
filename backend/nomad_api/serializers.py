@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from nomad.models import Vendor
+from nomad.models import User
 
-class VendorSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Vendor
+        model = User
         fields = '__all__'
         
 
