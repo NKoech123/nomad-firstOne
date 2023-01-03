@@ -11,7 +11,7 @@ class Account(Base):  # type: ignore
     __tablename__ = "account"
 
     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
-    username: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(
+    userfullname: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(
         sqlalchemy.String(length=64), nullable=False, unique=True
     )
     email: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=64), nullable=False, unique=True)
