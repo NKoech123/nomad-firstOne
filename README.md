@@ -1,5 +1,5 @@
 # NOMAD 😍 
-React Native and Django collabo to make us the next big thing!
+A platform that allows customers to easily track and purchase food from their favorite food trucks. The platform uses GPS technology to display the location of food trucks in real time, making it easy for customers to find and support their favorite mobile vendors. Customers can browse menus, place orders, and pay for their meals directly through the platform, making the entire process seamless and convenient. With the ability to support local food truck businesses and discover new culinary experiences, the platform has quickly become a hit among foodies and food truck enthusiasts alike.
 
 ## Frontend(React Native App)
 * At root nomad, run`yarn install`
