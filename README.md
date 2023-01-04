@@ -19,6 +19,20 @@ When the `Docker` is started, these are the URL addresses:
 
 The backend API without `Docker` can be found in `http://localhost:8000/docs`.
 
+## Quick start
+  ```
+ docker-compose build
+ docker-compose up
+
+ # Every time you write a new code, update your container with:
+ docker-compose up -d --build
+  
+  # db migrations
+ docker exec backend_app alembic revision --autogenerate -m "YOUR MIGRATION TITLE"
+ docker exec backend_app alembic upgrade head    # to register the database classes
+  
+   ```
+
 ## Why the above Tech-Stack?
 
 Well, the easy answer is **Asynchronousity** and **Speed**!
