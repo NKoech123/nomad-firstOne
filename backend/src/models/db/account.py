@@ -88,5 +88,16 @@ class Schedule(Base):  # type: ignore
         sqlalchemy.DateTime(timezone=True), nullable=False, server_default=sqlalchemy_functions.now()
     )
 
-   
-    
+class CustomerFollowingVendor(Base):  # type: ignore
+    __tablename__ = "customerfollowingvendor"
+
+    id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+    customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+    vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(foreign_key=True)
+
+class CustomerFollowingCustomer(Base):  # type: ignore
+    __tablename__ = "customerfollowingcustomer"
+
+    id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+    customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+    customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
