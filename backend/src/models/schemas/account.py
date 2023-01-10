@@ -37,3 +37,15 @@ class AccountWithToken(BaseSchemaModel):
 class AccountInResponse(BaseSchemaModel):
     id: int
     authorized_account: AccountWithToken
+
+class Customer(BaseSchemaModel):
+    id: int
+    fullname: str
+    created_at: datetime.datetime
+    updated_at: datetime.datetime | None
+
+class Vendor(BaseSchemaModel):
+    id: int
+    fullname: str
+    created_at: datetime.datetime
+    updated_at: datetime.datetime | None
