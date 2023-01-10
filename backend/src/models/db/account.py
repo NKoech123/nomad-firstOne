@@ -117,10 +117,11 @@ class CustomerFollowingVendor(Base):  # type: ignore
     vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(ForeignKey("vendor.id"))
    
 
-# class CustomerFollowingCustomer(Base):  # type: ignore
-#     __tablename__ = "customerfollowingcustomer"
+class CustomerFollowingCustomer(Base):  # type: ignore
+    __tablename__ = "customerfollowingcustomer"
 
-#     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
-#     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
-#     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+    id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+    follower_customer_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(ForeignKey("customer.id"))
+    followed_customer_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(ForeignKey("customer.id"))
+
 
