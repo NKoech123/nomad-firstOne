@@ -1,9 +1,11 @@
 import datetime
 
 import sqlalchemy
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped as SQLAlchemyMapped, mapped_column as sqlalchemy_mapped_column
 from sqlalchemy.sql import functions as sqlalchemy_functions
-from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
+
 
 from src.repository.table import Base
 
@@ -78,6 +80,7 @@ class Vendor(Base):  # type: ignore
     fullname: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(
         sqlalchemy.String(length=64), nullable=False, unique=True
     )
+    schedules: SQLAlchemyMapped[list["Schedule"]] = relationship(back_populates="vendor")
     created_at: SQLAlchemyMapped[datetime.datetime] = sqlalchemy_mapped_column(
         sqlalchemy.DateTime(timezone=True), nullable=False, server_default=sqlalchemy_functions.now()
     )
@@ -88,13 +91,23 @@ class Vendor(Base):  # type: ignore
     )
 
 class Schedule(Base):  # type: ignore
-    __tablename__ = "vendor"
+    __tablename__ = "schedule"
 
     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
-    vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(foreign_key=True)
-
+    vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(ForeignKey("vendor.id"))
+    event_location: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(
+        sqlalchemy.String(length=64), nullable=False, unique=True
+    )
     scheduled_at: SQLAlchemyMapped[datetime.datetime] = sqlalchemy_mapped_column(
         sqlalchemy.DateTime(timezone=True), nullable=False, server_default=sqlalchemy_functions.now()
+    )
+    created_at: SQLAlchemyMapped[datetime.datetime] = sqlalchemy_mapped_column(
+        sqlalchemy.DateTime(timezone=True), nullable=False, server_default=sqlalchemy_functions.now()
+    )
+    updated_at: SQLAlchemyMapped[datetime.datetime] = sqlalchemy_mapped_column(
+        sqlalchemy.DateTime(timezone=True),
+        nullable=True,
+        server_onupdate=sqlalchemy.schema.FetchedValue(for_update=True),
     )
 
 # class CustomerFollowingVendor(Base):  # type: ignore

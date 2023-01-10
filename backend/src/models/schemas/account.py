@@ -49,3 +49,10 @@ class Vendor(BaseSchemaModel):
     fullname: str
     created_at: datetime.datetime
     updated_at: datetime.datetime | None
+
+class Schedule(BaseSchemaModel):
+    id: int
+    vendor_id: int
+    scheduled_at: datetime.datetime
+    created_at: datetime.datetime
+    updated_at: datetime.datetime | None
