@@ -7,6 +7,12 @@ from sqlalchemy import ForeignKey
 
 from src.repository.table import Base
 
+import enum
+from sqlalchemy import Enum
+
+class AccountTypeEnum(enum.Enum):
+    vendor = 'vendor'
+    customer = 'customer'
 
 class Account(Base):  # type: ignore
     __tablename__ = "account"
@@ -16,6 +22,7 @@ class Account(Base):  # type: ignore
         sqlalchemy.String(length=64), nullable=False, unique=True
     )
     email: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=64), nullable=False, unique=True)
+    account_type: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(Enum(AccountTypeEnum)) #vendor, customer
     phone: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=64), nullable=False, unique=False)
     _hashed_password: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=1024), nullable=True)
     _hash_salt: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=1024), nullable=True)
@@ -84,20 +91,25 @@ class Schedule(Base):  # type: ignore
     __tablename__ = "vendor"
 
     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+    vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(foreign_key=True)
+
     scheduled_at: SQLAlchemyMapped[datetime.datetime] = sqlalchemy_mapped_column(
         sqlalchemy.DateTime(timezone=True), nullable=False, server_default=sqlalchemy_functions.now()
     )
 
-class CustomerFollowingVendor(Base):  # type: ignore
-    __tablename__ = "customerfollowingvendor"
+# class CustomerFollowingVendor(Base):  # type: ignore
+#     __tablename__ = "customerfollowingvendor"
 
-    id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
-    customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
-    vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(foreign_key=True)
+#     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+#     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+#     vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(foreign_key=True)
 
-class CustomerFollowingCustomer(Base):  # type: ignore
-    __tablename__ = "customerfollowingcustomer"
+# class CustomerFollowingCustomer(Base):  # type: ignore
+#     __tablename__ = "customerfollowingcustomer"
 
-    id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
-    customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
-    customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+#     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+#     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+#     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
+
+# class ScheduleVendor(Base):
+#     pass
