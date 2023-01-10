@@ -1,16 +1,15 @@
 import datetime
-
+import enum
 import sqlalchemy
+
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped as SQLAlchemyMapped, mapped_column as sqlalchemy_mapped_column
 from sqlalchemy.sql import functions as sqlalchemy_functions
 from sqlalchemy.orm import relationship
-
+from sqlalchemy import Enum
 
 from src.repository.table import Base
 
-import enum
-from sqlalchemy import Enum
 
 class AccountTypeEnum(enum.Enum):
     vendor = 'vendor'
@@ -110,12 +109,13 @@ class Schedule(Base):  # type: ignore
         server_onupdate=sqlalchemy.schema.FetchedValue(for_update=True),
     )
 
-# class CustomerFollowingVendor(Base):  # type: ignore
-#     __tablename__ = "customerfollowingvendor"
+class CustomerFollowingVendor(Base):  # type: ignore
+    __tablename__ = "customerfollowingvendor"
 
-#     id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
-#     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
-#     vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(foreign_key=True)
+    id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(primary_key=True, autoincrement="auto")
+    customer_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(ForeignKey("customer.id"))
+    vendor_id: SQLAlchemyMapped[int] =  sqlalchemy_mapped_column(ForeignKey("vendor.id"))
+   
 
 # class CustomerFollowingCustomer(Base):  # type: ignore
 #     __tablename__ = "customerfollowingcustomer"
@@ -124,5 +124,3 @@ class Schedule(Base):  # type: ignore
 #     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
 #     customer_id: SQLAlchemyMapped[int] = sqlalchemy_mapped_column(foreign_key=True)
 
-# class ScheduleVendor(Base):
-#     pass
