@@ -23,7 +23,7 @@ class Account(Base):  # type: ignore
         sqlalchemy.String(length=64), nullable=False, unique=True
     )
     email: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=64), nullable=False, unique=True)
-    account_type: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(Enum(AccountTypeEnum)) #vendor, customer
+    account_type: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=32), nullable=False, unique=False) #vendor or customer
     phone: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=64), nullable=False, unique=False)
     _hashed_password: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=1024), nullable=True)
     _hash_salt: SQLAlchemyMapped[str] = sqlalchemy_mapped_column(sqlalchemy.String(length=1024), nullable=True)
@@ -39,7 +39,6 @@ class Account(Base):  # type: ignore
         server_onupdate=sqlalchemy.schema.FetchedValue(for_update=True),
     )
     
-
     __mapper_args__ = {"eager_defaults": True}
 
     @property
