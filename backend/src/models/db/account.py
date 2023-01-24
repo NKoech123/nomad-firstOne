@@ -10,10 +10,9 @@ from sqlalchemy import Enum
 
 from src.repository.table import Base
 
-
-class AccountTypeEnum(enum.Enum):
-    vendor = 'vendor'
-    customer = 'customer'
+# class AccountTypeEnum(enum.Enum):
+#     vendor = 'vendor'
+#     customer = 'customer'
 
 class Account(Base):  # type: ignore
     __tablename__ = "account"

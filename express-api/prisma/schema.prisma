@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  VENDOR
+  CUSTOMER
+  BOTH
+}
+
+enum ProductType {
+  DRINKSPECIALS
+  SPECIALTYFOOD
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  name  String?
+  display_name String?
+  full_name String?
+  active Boolean @default(false)
+  email String @unique
+  userType UserType @default(CUSTOMER)
+  customer Customer?
+  vendor Vendor?
+  followedBy Follows[] @relation("following")
+  following  Follows[] @relation("follower")
+}
+
+model Vendor {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  userId Int @unique
+  user User @relation(fields:[userId], references:[id])
+  name  String?
+  display_name String
+  full_name String?
+  active Boolean @default(false)
+  email String @unique
+  schedules Schedule[]
+  review Review[]
+  order Order[]
+  product Product[]
+
+}
+
+model Customer {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  userId Int @unique
+  user User @relation(fields:[userId], references:[id])
+  name  String?
+  display_name String?
+  full_name String?
+  active Boolean @default(false)
+  email String @unique
+  review Review[]
+  order Order[]
+
+}
+
+// Customer is the only follower. Check customer's userId and Vendor's userId
+model Follows {
+  follower    User @relation("follower", fields: [followerId], references: [id])
+  followerId  Int
+  following   User @relation("following", fields: [followingId], references: [id])
+  followingId Int
+
+  @@id([followerId, followingId])
+}
+
+model Schedule {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  name  String?
+  description String?
+  vendor Vendor?  @relation(fields: [vendorId], references: [id])
+  vendorId Int?
+}
+
+model Review {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  customer Customer  @relation(fields: [customerId], references: [id])
+  vendor Vendor  @relation(fields: [vendorId], references: [id])
+  customerId Int
+  vendorId Int
+  description String?
+}
+
+model Order {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  customer Customer  @relation(fields: [customerId], references: [id])
+  vendor Vendor  @relation(fields: [vendorId], references: [id])
+  customerId Int
+  vendorId Int
+  description String?
+}
+
+model Product {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  vendor Vendor  @relation(fields: [vendorId], references: [id])
+  vendorId Int
+  isCustomersFavorite Boolean @default(false)
+  productType ProductType @default(SPECIALTYFOOD)
+  description String?
+}
+
+
+
+
