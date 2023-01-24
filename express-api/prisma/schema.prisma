@@ -52,6 +52,7 @@ model Vendor {
   review Review[]
   order Order[]
   product Product[]
+  vendor_products VendorProduct[]
 
 }
 
@@ -121,9 +122,22 @@ model Product {
   vendorId Int
   isCustomersFavorite Boolean @default(false)
   productType ProductType @default(SPECIALTYFOOD)
+  image String    //will have to figure this one out
   description String?
+  price String
+  vendor_products VendorProduct[]
 }
 
+model VendorProduct {
+  id    Int     @id @default(autoincrement())
+  vendor Vendor  @relation(fields: [vendorId], references: [id])
+  vendorId Int
+  product Product  @relation(fields: [productId], references: [id])
+  productId Int
+
+}
+
+// TBD:   ProductReview, VendorSchedule, VendorOrder, CustomerOrder
 
 
 
