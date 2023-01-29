@@ -8,16 +8,25 @@ A platform that allows customers to easily track and purchase food from their fa
 This is a template repository aimed to kick start your project with a setup from a real-world application! This template utilizes the following tech-stack:
 
 * 🐳 [Dockerized](https://www.docker.com/)
+*  [Express](https://expressjs.com/)
+* 🐳 [Dockerized](https://www.docker.com/)
 
-# Launch PSQL db
-`docker-compose up -d`
-
-# Prisma Migrate
-` yarn prisma migrate dev --name init`
-
-# Run Server
-`yarn ts-node src/index.ts`
-
+### Run With Docker
+You must have ```docker``` and ```docker-compose``` tools installed to work with material in this section.
+Head to the ```/backend``` folder of the project.
+Spin-up docker
+```
+docker-compose up -d
+```
+Run Migrations
+```
+yarn prisma migrate dev --name init
+```
+Run Server
+```
+yarn ts-node src/index.ts
+```
 REST API server ready at: http://localhost:3000
+
 
 <img width="1073" alt="Screenshot 2023-01-24 at 9 11 10 PM" src="https://user-images.githubusercontent.com/84946242/214374409-5da5c764-e9f3-4622-8baf-a3ca8b643324.png">
