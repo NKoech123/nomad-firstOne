@@ -1,6 +1,4 @@
-### Backend
-You must have ```docker``` and ```docker-compose``` tools installed to work with material in this section.
-Head to the ```/backend``` folder of the project.
+### Backend 
 Spin-up docker
 ```
 docker-compose up -d
